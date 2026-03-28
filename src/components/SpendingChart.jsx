@@ -7,7 +7,7 @@ import {
   Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 
-const COLORS = ['#e53935', '#fb8c00', '#fdd835', '#43a047', '#1e88e5', '#8e24aa', '#6d4c41'];
+const COLORS = ['#ec4899', '#facc15', '#3b82f6', '#16a34a', '#f97316', '#8b5cf6', '#000000'];
 const CHART_TYPES = ['pie', 'bar', 'area', 'radar'];
 
 function SpendingChart({ transactions }) {
@@ -51,7 +51,7 @@ function SpendingChart({ transactions }) {
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip formatter={dollarFormatter} />
-            <Area type="monotone" dataKey="value" name="Spending" fill="#1e88e5" stroke="#1565c0" fillOpacity={0.3} />
+            <Area type="monotone" dataKey="value" name="Spending" fill="#3b82f6" stroke="#000" fillOpacity={0.3} />
           </AreaChart>
         );
       case 'radar':
@@ -61,7 +61,7 @@ function SpendingChart({ transactions }) {
             <PolarAngleAxis dataKey="name" />
             <PolarRadiusAxis />
             <Tooltip formatter={dollarFormatter} />
-            <Radar name="Spending" dataKey="value" stroke="#1e88e5" fill="#1e88e5" fillOpacity={0.3} />
+            <Radar name="Spending" dataKey="value" stroke="#000" fill="#3b82f6" fillOpacity={0.3} />
           </RadarChart>
         );
       default:
