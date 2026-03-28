@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import ConfirmModal from './ConfirmModal'
 
-function TransactionList({ transactions, categories }) {
+function TransactionList({ transactions, categories, onDeleteTransaction }) {
   const [filterType, setFilterType] = useState("all");
   const [filterCategory, setFilterCategory] = useState("all");
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   let filteredTransactions = transactions;
   if (filterType !== "all") {
@@ -11,6 +13,11 @@ function TransactionList({ transactions, categories }) {
   if (filterCategory !== "all") {
     filteredTransactions = filteredTransactions.filter(t => t.category === filterCategory);
   }
+
+  const handleConfirmDelete = () => {
+    onDeleteTransaction(deleteTarget.id);
+    setDeleteTarget(null);
+  };
 
   return (
     <div className="transactions">
@@ -36,6 +43,7 @@ function TransactionList({ transactions, categories }) {
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -47,10 +55,21 @@ function TransactionList({ transactions, categories }) {
               <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
                 {t.type === "income" ? "+" : "-"}${t.amount}
               </td>
+              <td>
+                <button className="delete-btn" onClick={() => setDeleteTarget(t)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {deleteTarget && (
+        <ConfirmModal
+          message={`Are you sure you want to delete "${deleteTarget.description}"?`}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setDeleteTarget(null)}
+        />
+      )}
     </div>
   );
 }
