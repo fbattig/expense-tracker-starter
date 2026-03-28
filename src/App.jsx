@@ -3,6 +3,7 @@ import './App.css'
 import Summary from './components/Summary'
 import AddTransaction from './components/AddTransaction'
 import TransactionList from './components/TransactionList'
+import SpendingChart from './components/SpendingChart'
 import { categories } from './data/categories'
 import { initialTransactions } from './data/initialTransactions'
 
@@ -25,6 +26,8 @@ function App() {
       <Summary transactions={transactions} />
 
       <AddTransaction categories={categories} onAddTransaction={handleAddTransaction} />
+
+      <SpendingChart transactions={transactions} />
 
       <TransactionList transactions={transactions} categories={categories} onDeleteTransaction={handleDeleteTransaction} />
     </div>
