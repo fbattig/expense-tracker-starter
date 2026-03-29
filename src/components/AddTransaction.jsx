@@ -8,7 +8,7 @@ function AddTransaction({ categories, onAddTransaction }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) return;
+    if (!description || !amount || Number(amount) <= 0) return;
 
     onAddTransaction({
       id: Date.now(),
